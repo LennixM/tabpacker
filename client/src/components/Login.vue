@@ -1,10 +1,10 @@
 <template>
-  <div class="register">
-    <h1>Register</h1>
+  <div class="login">
+    <h1>Login</h1>
     <v-container id="form">
       <v-layout justify-center column fill-height>
         <v-flex>
-          <v-form @submit.prevent="register">
+          <v-form @submit.prevent="login">
             <v-text-field
               v-model="email"
               label="E-Mail"
@@ -18,7 +18,7 @@
             </v-text-field>
             <div class="error" v-html="error">
             </div>
-            <v-btn @click="register">Register</v-btn>
+            <v-btn @click="login">login</v-btn>
           </v-form>
         </v-flex>
       </v-layout>
@@ -37,9 +37,9 @@ export default {
     }
   },
   methods: {
-      async register () {
+      async login () {
         try {
-          const response = await AuthenticationService.register({
+          const response = await AuthenticationService.login({
             email: this.email,
             password: this.password,
           })
@@ -59,7 +59,7 @@ export default {
   color: red;
 }
 
-.register {
+.login {
 }
 
 #form {
