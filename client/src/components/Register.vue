@@ -4,16 +4,19 @@
     <v-container id="form">
       <v-layout justify-center column fill-height>
         <v-flex>
-          <v-form @submit.prevent="register">
+          <v-form @submit.prevent="register"
+            autocomplete="off">
             <v-text-field
               v-model="email"
               label="E-Mail"
+              autocomplete="new-password"
               required>
             </v-text-field>
             <v-text-field
               v-model="password"
               label="Password"
               :type="'password'"
+              autocomplete="new-password"
               required>
             </v-text-field>
             <div class="error" v-html="error">
@@ -31,23 +34,22 @@ import AuthenticationService from '@/services/AuthenticationService'
 export default {
   data () {
     return {
-        email: '',
-        password: '',
-        error: null
+      email: '',
+      password: '',
+      error: null
     }
   },
   methods: {
-      async register () {
-        try {
-          const response = await AuthenticationService.register({
-            email: this.email,
-            password: this.password,
-          })
-        }
-        catch (error) {
-          this.error = error.response.data.error
-        }
+    async register () {
+      try {
+        await AuthenticationService.register({
+          email: this.email,
+          password: this.password
+        })
+      } catch (error) {
+        this.error = error.response.data.error
       }
+    }
 
   }
 }
@@ -57,9 +59,6 @@ export default {
 <style scoped>
 .error {
   color: red;
-}
-
-.register {
 }
 
 #form {

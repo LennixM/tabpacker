@@ -31,24 +31,22 @@ import AuthenticationService from '@/services/AuthenticationService'
 export default {
   data () {
     return {
-        email: '',
-        password: '',
-        error: null
+      email: '',
+      password: '',
+      error: null
     }
   },
   methods: {
-      async login () {
-        try {
-          const response = await AuthenticationService.login({
-            email: this.email,
-            password: this.password,
-          })
-        }
-        catch (error) {
-          this.error = error.response.data.error
-        }
+    async login () {
+      try {
+        await AuthenticationService.login({
+          email: this.email,
+          password: this.password
+        })
+      } catch (error) {
+        this.error = error.response.data.error
       }
-
+    }
   }
 }
 </script>
@@ -57,9 +55,6 @@ export default {
 <style scoped>
 .error {
   color: red;
-}
-
-.login {
 }
 
 #form {
