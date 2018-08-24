@@ -18,7 +18,7 @@
             </v-text-field>
             <div class="error" v-html="error">
             </div>
-            <v-btn @click="login">login</v-btn>
+            <v-btn @click="login" to="/">login</v-btn>
           </v-form>
         </v-flex>
       </v-layout>
@@ -39,12 +39,14 @@ export default {
   methods: {
     async login () {
       try {
-        await AuthenticationService.login({
+        const response = await AuthenticationService.login({
           email: this.email,
           password: this.password
         })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
-        this.error = error.response.data.error
+        this.error = "Your login information is incorrect"
       }
     }
   }

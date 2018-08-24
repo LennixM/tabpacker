@@ -1,4 +1,5 @@
 <template>
+
   <div id="app">
     <v-app>
       <PageHeader/>
@@ -20,6 +21,9 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons');
+i{ font-family: 'Material Icons'; }
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

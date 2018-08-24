@@ -7,6 +7,18 @@
           <v-form @submit.prevent="register"
             autocomplete="off">
             <v-text-field
+              v-model="firstname"
+              label="First Name"
+              autocomplete="new-password"
+              required>
+            </v-text-field>
+            <v-text-field
+              v-model="lastname"
+              label="Last Name"
+              autocomplete="new-password"
+              required>
+            </v-text-field>
+            <v-text-field
               v-model="email"
               label="E-Mail"
               autocomplete="new-password"
@@ -21,7 +33,7 @@
             </v-text-field>
             <div class="error" v-html="error">
             </div>
-            <v-btn @click="register">Register</v-btn>
+            <v-btn @click="register" to="/">Register</v-btn>
           </v-form>
         </v-flex>
       </v-layout>
@@ -34,6 +46,8 @@ import AuthenticationService from '@/services/AuthenticationService'
 export default {
   data () {
     return {
+      firstname: '',
+      lastname: '',
       email: '',
       password: '',
       error: null
@@ -42,10 +56,14 @@ export default {
   methods: {
     async register () {
       try {
-        await AuthenticationService.register({
+        const response = await AuthenticationService.register({
+          firstname: this.firstname,
+          lastname: this.lastname,
           email: this.email,
           password: this.password
         })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }

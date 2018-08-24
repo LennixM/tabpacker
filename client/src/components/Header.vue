@@ -1,25 +1,17 @@
 <template>
-  <v-toolbar fixed dark color="primary">
-    <v-toolbar-items>
-      <v-btn flat to="/">
-        Society
-      </v-btn>
-    </v-toolbar-items>
-    <v-spacer></v-spacer>
-    <v-toolbar-items>
-      <v-btn flat to="/login">
-        Login
-      </v-btn>
-      <v-btn flat to="/register">
-        Sign Up
-      </v-btn>
-    </v-toolbar-items>
-  </v-toolbar>
+  <HeaderNotLoggedIn v-if="!$store.state.isUserLoggedIn"></HeaderNotLoggedIn>
+  <HeaderLoggedIn v-else></HeaderLoggedIn>
 </template>
 
 <script>
+import HeaderLoggedIn from "./HeaderLoggedIn.vue"
+import HeaderNotLoggedIn from "./HeaderNotLoggedIn.vue"
 export default {
   name: 'Header',
+  components: {
+    HeaderLoggedIn,
+    HeaderNotLoggedIn
+  },
   data () {
     return {
     }
