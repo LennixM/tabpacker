@@ -2,6 +2,7 @@ const AuthenticationController = require('./controllers/AuthenticationController
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const ShowUsersController = require('./controllers/ShowUsersController')
 const Profile = require('./controllers/Profile')
+const AddFriend = require('./controllers/AddFriend')
 
 
 module.exports = (app) => {
